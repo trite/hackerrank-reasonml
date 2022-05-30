@@ -35,3 +35,19 @@ let readline = (callback) => {
 let close = () => {
     rl##close();
 };
+
+let read: unit => string = () => {
+    let result = ref("");
+
+    readline(current => {result := current});
+
+    result.contents
+};
+
+let readClose: unit => string = () => {
+    let result = read();
+
+    close();
+
+    result
+}

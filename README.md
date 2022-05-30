@@ -1,5 +1,61 @@
+# Quick Getting Started:
+`clone` the repo and `cd` into the local folder you save to (in this case `blarghle`):
+```sh
+$ git clone git@github.com:trite/hackerrank-reasonml.git blarghle
+Cloning into 'blarghle'...
+remote: Enumerating objects: 19, done.
+remote: Counting objects: 100% (19/19), done.
+remote: Compressing objects: 100% (16/16), done.
+remote: Total 19 (delta 1), reused 19 (delta 1), pack-reused 0
+Receiving objects: 100% (19/19), 283.99 KiB | 1.08 MiB/s, done.
+Resolving deltas: 100% (1/1), done.
+trite@DESKTOP-0ACBTNR:/mnt/c/git$ cd blarghle/
+```
+
+`npm install` next:
+```sh
+$ npm install
+npm WARN deprecated source-map-url@0.4.1: See https://github.com/lydell/source-map-url#deprecated
+npm WARN deprecated urix@0.1.0: Please see https://github.com/lydell/urix#deprecated
+npm WARN deprecated resolve-url@0.2.1: https://github.com/lydell/resolve-url#deprecated
+npm WARN deprecated source-map-resolve@0.5.3: See https://github.com/lydell/source-map-resolve#deprecated
+npm WARN deprecated sane@4.1.0: some dependency vulnerabilities fixed, support for node < 10 dropped, and newer ECMAScript syntax/features added
+
+added 580 packages, and audited 581 packages in 31s
+
+34 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+```
+
+You should now be able to `npm run build`:
+```sh
+$ npm run build
+
+> hackerrank-reasonm@0.1.0 build
+> bsb -make-world
+
+Dependency on @glennsl/bs-jest
+bsb: [5/5] src/jest.cmj
+bsb: [7/7] install.stamp
+Dependency Finished
+bsb: [9/9] src/CompareTheTriplets.cmj
+```
+
+Last but not least executing an existing `src/*.re` file locally and feeding it input (2nd and 3rd lines below) via `node`:
+```sh
+$ node src/AVeryBigSum.bs.js
+5 # <-- Manually entered --v
+1000000001 1000000002 1000000003 1000000004 1000000005
+5000000015 # <-- Output
+```
+
 # HackerRank-ReasonML
 Project for making it easier to turn ReasonML into JavaScript targeted at HackerRank. Meaning you can:
+
+## Step 0. Pre-requisites
+You will need to run an `npm install` if you haven't yet for your local copy of this repo.
 
 ## Step 1. Write some ReasonML
 Write your ReasonML code to solve the problem (this is still a bit hairy for me right now, cleaning things up eventually):
@@ -69,6 +125,12 @@ TODO: Create a template of this project from an earlier commit, this is my repo 
 
 # VSCode OCaml Platform extension troubleshooting
 If you're having any issues with the [OCaml Platform extension](https://github.com/ocamllabs/vscode-ocaml-platform) (used to hook VSCode up to the [`ocaml-lsp-server`](https://github.com/ocaml/ocaml-lsp) for intellisense-y goodness) here are a few things worth trying:
+
+### 0. NPM Install
+If you haven't yet run it on your local copy of this repo you need to before doing any further troubleshooting:
+```sh
+$ npm install
+```
 
 ### 1. Version check
 You should be running on version 4.06 of the ocaml compiler:

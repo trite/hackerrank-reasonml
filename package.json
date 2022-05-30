@@ -5,7 +5,7 @@
     "scripts": {
         "build": "bsb -make-world",
         "clean": "bsb -clean-world",
-        "watch": "bsb -make-world -w",
+        "watch": "npm run clean && bsb -make-world -w",
         "start": "node ./src/Hello.bs.js",
         "test": "jest",
         "testwatch": "jest --watch",
