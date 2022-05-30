@@ -1,5 +1,6 @@
 // Modified/updated slightly from the original code here:
 //   https://github.com/kfish610/bs-readline/blob/master/src/Readline.re
+open Trelude;
 
 type io = {.
     "input": in_channel,
@@ -26,9 +27,9 @@ let rl = createInterface({
     "output": [%raw "process.stdout"]
 });
 
-let readline = (callback) => {
+let readLine = (f) => {
     rl##on("line", (data) => {
-        callback(data);
+        f(data);
     });
 };
 
@@ -36,18 +37,18 @@ let close = () => {
     rl##close();
 };
 
-let read: unit => string = () => {
-    let result = ref("");
+let rec readLines = (count, acc, isDone, f) =>
+  count <= 0
+  ? {
+    f(acc |> Js.List.rev |> Js.List.toVector);
+    if (isDone) {
+      close();
+    }
+  }
+  : readLine(line => 
+    readLines(count-1, line ^: acc, isDone, f)
+  );
 
-    readline(current => {result := current});
-
-    result.contents
-};
-
-let readClose: unit => string = () => {
-    let result = read();
-
-    close();
-
-    result
-}
+// :-( Soon I'll be more familiar with the right way to do this I hope!
+let readLines = (count, close, f) =>
+  readLines(count, [], close, f);

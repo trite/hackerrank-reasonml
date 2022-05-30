@@ -2,8 +2,8 @@
 
 let (>>) = (f, g, x) => g(f(x));
 
-Readline.readline(line1 => {
-  Readline.readline(line2 => {
+Readline.readLine(line1 => {
+  Readline.readLine(line2 => {
     let parseLine =
       Js.String.split(" ")
       >> Js.Array.map(int_of_string);

@@ -1,3 +1,5 @@
+// https://www.hackerrank.com/challenges/diagonal-difference/problem
+
 open Trelude;
 
 let diag1: (int, array(array(int))) => int = (len, matrix) => {
@@ -12,40 +14,30 @@ let diag2: (int, array(array(int))) => int = (len, matrix) => {
     |> sum
 };
 
-let diagAndDiff: (int, array(array(int))) => int = (len, matrix) => {
-    // try to combine both diagonal checks into the same call?
+let diagonalDifference: (int, array(array(int))) => int = (len, matrix) => {
+    let d1 = diag1(len, matrix);
+    let d2 = diag2(len, matrix);
+    abs(d1 - d2)
 };
 
-let len =
-    Readline.read()
-    |> int_of_string;
+let parse: (array(string)) => array(array(int)) = 
+    Js.Array.map(
+        Js.String.split(" ")
+        >> Js.Array.map(int_of_string)
+    )
 
+Readline.readLine(matrixSize => {
+    let matrixSize = matrixSize |> int_of_string;
+    Js.log("Matrix size: " ++ (matrixSize |> string_of_int));
 
-
-// Readline.readline(len => {
-//     let len = len |> int_of_string;
-//     len
-//     |> range(0)
-//     |> Js.List.map((. x) => {
-//         let result = ref ((0,0));
-
-//         Readline.readline(currentLine => {
-//             let current =
-//                 currentLine
-//                 |> Js.String.split(" ")
-//                 |> Js.Array.map(int_of_string);
-
-//             let y = len - x - 1;
-
-//             result := (current[x], current[y]);
-
-//             if (x+1 == len) {
-//                 Readline.close();
-//             };
-//         });
-
-//         ^result
-//     })
-//     |> Js.List.foldLeft((. (a1, b2), (a2, b2)) => (a1 + a2, b1 + b2), (0,0))
-//     |> ignore
-// });
+    Readline.readLines(
+            matrixSize
+            , true
+            , (arr) =>
+        arr
+        |> parse
+        |> diagonalDifference(matrixSize)
+        |> string_of_int
+        |> Js.log
+    )
+});
