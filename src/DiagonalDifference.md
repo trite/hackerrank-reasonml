@@ -1,4 +1,4 @@
-Currently fails like so when trying to run:
+Latest error situation:
 
 ```sh
 trite@DESKTOP-0ACBTNR:/mnt/c/git/hackerrank-reasonml$ node src/DiagonalDifference.bs.js 
