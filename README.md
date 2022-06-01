@@ -160,3 +160,76 @@ TODO: rest of this one
 ### 3. LSP error logs
 Check error messages in LSP by enabling them and all that
 TODO: rest of this one too
+
+# Can't resolve 'blah.bs.js' in 'path'
+Make sure you're running the `hackify` command with a path that is exact. `src/File.bs.js` will fail, while `./src/File.bs.js` will work:
+```sh
+$ npm run hackify src/DiagonalDifference.bs.js 
+
+> hackerrank-reasonm@0.1.0 prehackify
+> npm run build
+
+
+> hackerrank-reasonm@0.1.0 build
+> bsb -make-world
+
+bsb: no work to do.
+[3/3] Building src/DiagonalDifference.cmj
+
+> hackerrank-reasonm@0.1.0 hackify
+> npx webpack build -t "node" --mode production --entry  "src/DiagonalDifference.bs.js"
+
+assets by status 0 bytes [cached] 1 asset
+
+ERROR in main
+Module not found: Error: Can't resolve 'src/DiagonalDifference.bs.js' in '/Users/paul/git/_sandbox/hackerrank-reasonml'
+Did you mean './src/DiagonalDifference.bs.js'?
+Requests that should resolve in the current directory need to start with './'.
+Requests that start with a name are treated as module requests and resolve within module directories (node_modules).
+If changing the source code is not an option there is also a resolve options called 'preferRelative' which tries to resolve these kind of requests in the current directory too.
+resolve 'src/DiagonalDifference.bs.js' in '/Users/paul/git/_sandbox/hackerrank-reasonml'
+  Parsed request is a module
+  using description file: /Users/paul/git/_sandbox/hackerrank-reasonml/package.json (relative path: .)
+    resolve as module
+      looking for modules in /Users/paul/git/_sandbox/hackerrank-reasonml/node_modules
+        /Users/paul/git/_sandbox/hackerrank-reasonml/node_modules/src doesn't exist
+      /Users/paul/git/_sandbox/node_modules doesn't exist or is not a directory
+      /Users/paul/git/node_modules doesn't exist or is not a directory
+      /Users/paul/node_modules doesn't exist or is not a directory
+      /Users/node_modules doesn't exist or is not a directory
+      /node_modules doesn't exist or is not a directory
+
+webpack 5.72.1 compiled with 1 error in 96 ms
+$ npm run hackify ./src/DiagonalDifference.bs.js
+
+> hackerrank-reasonm@0.1.0 prehackify
+> npm run build
+
+
+> hackerrank-reasonm@0.1.0 build
+> bsb -make-world
+
+bsb: no work to do.
+bsb: no work to do.
+
+> hackerrank-reasonm@0.1.0 hackify
+> npx webpack build -t "node" --mode production --entry  "./src/DiagonalDifference.bs.js"
+
+asset main.js 38.3 KiB [emitted] [minimized] (name: main)
+modules by path ./node_modules/bs-platform/lib/js/*.js 94.6 KiB
+  ./node_modules/bs-platform/lib/js/caml_array.js 2.24 KiB [built] [code generated]
+  ./node_modules/bs-platform/lib/js/pervasives.js 17.4 KiB [built] [code generated]
+  ./node_modules/bs-platform/lib/js/caml_format.js 19.4 KiB [built] [code generated]
+  ./node_modules/bs-platform/lib/js/curry.js 11.9 KiB [built] [code generated]
+  ./node_modules/bs-platform/lib/js/js_list.js 5.18 KiB [built] [code generated]
+  ./node_modules/bs-platform/lib/js/caml_io.js 1.81 KiB [built] [code generated]
+  ./node_modules/bs-platform/lib/js/caml_sys.js 2.23 KiB [built] [code generated]
+  ./node_modules/bs-platform/lib/js/caml_bytes.js 2.99 KiB [built] [code generated]
+  + 9 modules
+modules by path ./src/ 4.31 KiB
+  ./src/DiagonalDifference.bs.js 1.77 KiB [built] [code generated]
+  ./src/utils/Trelude.bs.js 901 bytes [built] [code generated]
+  ./src/utils/Readline.bs.js 1.66 KiB [built] [code generated]
+external "readline" 42 bytes [built] [code generated]
+webpack 5.72.1 compiled successfully in 528 ms
+```
